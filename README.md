@@ -27,5 +27,6 @@ Rotas:
     "value" : "100000.00"
 }
 <BR />
+<BR />
 /api/payments/idPagamento -> consulta um pagamento através de seu id  <BR />
 
