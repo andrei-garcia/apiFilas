@@ -5,3 +5,7 @@ DADOS BANCO <BR />
 DB_DATABASE=testevaga <BR />
 DB_USERNAME=root <BR />
 DB_PASSWORD= <BR />
+
+Confi fila : 
+
+QUEUE_CONNECTION=database
