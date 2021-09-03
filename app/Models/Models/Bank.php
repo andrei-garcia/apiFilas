@@ -34,7 +34,14 @@ class Bank extends Model
 
     public static function consultaPagamento($id)
     {
-        return Payment::findOrFail($id);
+        
+        if(Payment::find($id) == null)
+        {
+            return ["Pagamento nao localizado"];
+        }else
+        {
+            return Payment::find($id);
+        }
     }
 
     public static function processaPagamento($id)
@@ -50,12 +57,12 @@ class Bank extends Model
     {
         $dadosPagamento['status'] = "PROCESSADO";    
         Payment::findOrfail($id)->update($dadosPagamento);
-        atualizaStatusAposProcessamento::dispatch($id)->delay(now()->addSeconds('20'));
+        atualizaStatusAposProcessamento::dispatch($id)->delay(now()->addSeconds('120'));
     }
 
     public static function atualizaStatusAposProcessamento($id)
     {
-        $dadosPagamento['status'] = now()->getPreciseTimestamp() % 2 == 0 ? "PAGO" : "PROCESSADO";    
+        $dadosPagamento['status'] = now()->getPreciseTimestamp() % 2 == 0 ? "PAGO" : "REJEITADO";    
         Payment::findOrfail($id)->update($dadosPagamento);
     }
 }

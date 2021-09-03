@@ -15,7 +15,14 @@ class BankController extends Controller
      */
     public function index()
     {
-        return Payment::all();
+        $objRetorno = Payment::all();
+        if(Payment::all()->count() == 0)
+        {
+            return ['nenhum pagamento encontrado'];
+        }else
+        {
+            return $objRetorno;
+        }
     }
 
     /**
@@ -28,7 +35,7 @@ class BankController extends Controller
     {
         $bank = new Bank();
         $bank->registraPagamento($request);
-        return ["sucess" =>"pagamento criado"];
+        return ["sucess" =>"pagamento criado com sucesso"];
     }
 
     /**
